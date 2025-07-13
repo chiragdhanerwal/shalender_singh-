@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Shalender Singh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for mobile menu */
+        .mobile-menu-enter {
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        }
+        .mobile-menu-enter-from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .mobile-menu-enter-to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu-leave {
+            transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+        }
+        .mobile-menu-leave-from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu-leave-to {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body class="font-inter bg-white" x-data="shopGallery()">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50" x-data="{ mobileMenuOpen: false, worksDropdownOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-playfair font-semibold text-gray-900">Shalender Singh</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="exhibitions.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Exhibitions</a>
+                        <a href="shop.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium font-bold">Shop</a>
+                        <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                            <button class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium flex items-center">
+                                Works
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div x-show="open" 
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 transform scale-95"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-95"
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                <a href="works.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold">All Artworks</a>
+                                <a href="works.html?category=digital-art" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Digital Artworks</a>
+                                <a href="works.html?category=paintings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Oil Paintings</a>
+                                <a href="works.html?category=portrait-paintings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portrait Paintings</a>
+                                <a href="works.html?category=murals" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Murals</a>
+                                <a href="works.html?category=watercolor" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Watercolor</a>
+                                <a href="works.html?category=sketches" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sketchworks</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" x-show="!mobileMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg class="h-6 w-6" x-show="mobileMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 transform -translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform -translate-y-2"
+            class="md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">About</a>
+                <a href="exhibitions.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Exhibitions</a>
+                <a href="shop.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md font-bold">Shop</a>
+                <div x-data="{ worksOpen: false }" class="relative">
+                    <button @click="worksOpen = !worksOpen" 
+                            class="w-full text-left px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md flex items-center justify-between">
+                        Works
+                        <svg class="h-5 w-5 transition-transform duration-200" 
+                             :class="{ 'rotate-180': worksOpen }"
+                             fill="none" 
+                             stroke="currentColor" 
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="worksOpen"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 transform -translate-y-2"
+                        x-transition:enter-end="opacity-100 transform translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 transform translate-y-0"
+                        x-transition:leave-end="opacity-0 transform -translate-y-2"
+                        class="bg-gray-50 rounded-md mt-1">
+                        <a href="works.html" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600 font-semibold">All Artworks</a>
+                        <a href="works.html?category=digital-art" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Digital Artworks</a>
+                        <a href="works.html?category=paintings" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Oil Paintings</a>
+                        <a href="works.html?category=portrait-paintings" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Portrait Paintings</a>
+                        <a href="works.html?category=murals" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Murals</a>
+                        <a href="works.html?category=watercolor" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Watercolor</a>
+                        <a href="works.html?category=sketches" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Sketchworks</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 bg-gray-50 min-h-screen">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-12 md:mb-16">
+                <h1 class="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-6">Shop Artworks</h1>
+                <p class="text-base md:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Purchase original artworks by Shalender Singh. For inquiries or to buy, click the button below each piece.
+                </p>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
+                <template x-for="artwork in artworks" :key="artwork.id">
+                    <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6">
+                        <div class="relative aspect-square mb-6">
+                            <img :src="artwork.image" 
+                                 :alt="artwork.title" 
+                                 class="w-full h-full object-contain object-center rounded-md bg-white">
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-lg md:text-xl font-semibold text-gray-900" x-text="artwork.title"></h3>
+                            <p class="text-sm md:text-base text-gray-600" x-text="artwork.size"></p>
+                            <p class="text-base md:text-lg font-medium text-gray-900">₹ <span x-text="artwork.price"></span></p>
+                            <button @click="window.location.href='mailto:shalenderart@gmail.com?subject=Purchase Inquiry for ' + artwork.title" 
+                                    class="w-full mt-4 bg-gray-900 text-white px-4 py-3 rounded-md hover:bg-gray-800 transition-colors duration-200 text-sm md:text-base">
+                                Buy / Enquire
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-sm">ALL IMAGES AND SITE CONTENT COPYRIGHT © 2025 SHALENDER SINGH - ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function shopGallery() {
+            return {
+                artworks: [
+                    { id: 1, title: 'Lotus', size: '24 x 36 inches', price: '25,000', image: 'assets/paintings/lotus.jpg' },
+                    { id: 2, title: 'Lotus 2', size: '24 x 36 inches', price: '25,000', image: 'assets/paintings/lotus 2.jpg' },
+                    { id: 3, title: 'Abstract Composition 1', size: '24 x 36 inches', price: '30,000', image: 'assets/paintings/24x36\'\' oil on canvas.jpg' },
+                    { id: 4, title: 'Abstract Study 1', size: '24 x 24 inches', price: '20,000', image: 'assets/paintings/24X24 OIL ON CANVAS.jpg' },
+                    { id: 5, title: 'Abstract Study 2', size: '24 x 24 inches', price: '20,000', image: 'assets/paintings/24x24\'\' oil on canvas.jpg' },
+                    { id: 6, title: 'Large Abstract 1', size: '32 x 34 inches', price: '35,000', image: 'assets/paintings/32x34inches oil on canvas.jpg' },
+                    { id: 7, title: 'Large Abstract 2', size: '32 x 42 inches', price: '40,000', image: 'assets/paintings/32x42\'\' oil on canvas.jpg' },
+                    { id: 8, title: 'Monumental Abstract 1', size: '40 x 60 inches', price: '75,000', image: 'assets/paintings/40x60inches acrylic on canvas (2).jpg' },
+                    { id: 9, title: 'Monumental Abstract 2', size: '40 x 60 inches', price: '75,000', image: 'assets/paintings/40x60inches, acrylic on canvas.JPG' },
+                    { id: 10, title: 'Grand Abstract', size: '48 x 72 inches', price: '90,000', image: 'assets/paintings/48x72\'\' oil & acrylic on canvas..jpg' },
+                    { id: 11, title: 'Dyptich', size: '48 x 96 inches', price: '120,000', image: 'assets/paintings/48x96inches oil on canvas, DYPTICH.jpg' },
+                    { id: 12, title: 'Monumental Series 1', size: '60 x 84 inches', price: '150,000', image: 'assets/paintings/60x84\'\' oil on canvas turto.jpg' },
+                    { id: 13, title: 'Monumental Series 2', size: '60 x 84 inches', price: '150,000', image: 'assets/paintings/60x84inches oil on canvas.jpg' },
+                    { id: 14, title: 'Invincible', size: '36 x 48 inches', price: '45,000', image: 'assets/paintings/invincible.jpg' },
+                    { id: 15, title: 'Joyful Ride', size: '40 x 60 inches', price: '75,000', image: 'assets/paintings/joyful ride oil on canvas (2).jpg' },
+                    { id: 16, title: 'Joyful Ride-1', size: '40 x 60 inches', price: '75,000', image: 'assets/paintings/Joyful Ride-1,40x60\'\'oil on canvas.jpg' },
+                    { id: 17, title: 'Abstract Series B1', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/b1.jpg' },
+                    { id: 18, title: 'Abstract Series B2', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/b2.jpg' },
+                    { id: 19, title: 'Abstract Series B3', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/b3.jpg' },
+                    { id: 20, title: 'Geometric Series G1', size: 'Oil on Canvas', price: '30,000', image: 'assets/paintings/g1.jpg' },
+                    { id: 21, title: 'Geometric Series G2', size: 'Oil on Canvas', price: '30,000', image: 'assets/paintings/g2.jpg' },
+                    { id: 22, title: 'Study Series S1', size: '12 x 48 inches', price: '20,000', image: 'assets/paintings/s1 12x48\'\' oil on canvas.jpg' },
+                    { id: 23, title: 'Study Series S2', size: 'Oil on Canvas', price: '20,000', image: 'assets/paintings/s2.jpg' },
+                    { id: 24, title: 'Study Series S3', size: '12 x 48 inches', price: '20,000', image: 'assets/paintings/s3 12x48\'\', oil on canvas.jpg' },
+                    { id: 25, title: 'Study Series S4', size: '12 x 48 inches', price: '20,000', image: 'assets/paintings/s4 12x48\'\',oil on canvas.jpg' },
+                    { id: 26, title: 'Unfold Folds', size: '36 x 36 inches', price: '40,000', image: 'assets/paintings/Unfold Folds,36x36\'\'oil on canvas.jpg' },
+                    { id: 27, title: 'Untitled Abstract', size: '36 x 48 inches', price: '45,000', image: 'assets/paintings/untitled 36x48\'\'oil&acrylic on canvas.JPG' },
+                    { id: 28, title: 'Studio Series MG-1', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1584.JPG' },
+                    { id: 29, title: 'Studio Series MG-2', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1587.JPG' },
+                    { id: 30, title: 'Studio Series MG-3', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1593.JPG' },
+                    { id: 31, title: 'Studio Series MG-4', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1597.JPG' },
+                    { id: 32, title: 'Studio Series MG-5', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1600.JPG' },
+                    { id: 33, title: 'Studio Series MG-6', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1605.JPG' },
+                    { id: 34, title: 'Studio Series MG-7', size: 'Oil on Canvas', price: '35,000', image: 'assets/paintings/_MG_1637.jpg' },
+                    { id: 35, title: 'Gallery Series 1', size: 'Oil on Canvas', price: '40,000', image: 'assets/paintings/IMG_2537.jpg' },
+                    { id: 36, title: 'Gallery Series 2', size: 'Oil on Canvas', price: '40,000', image: 'assets/paintings/IMG_2566.jpg' },
+                    { id: 37, title: 'Contemporary Series 1', size: 'Oil on Canvas', price: '45,000', image: 'assets/paintings/WhatsApp Image 2025-04-13 at 11.53.42_78b20d0a.jpg' },
+                    { id: 38, title: 'Contemporary Series 2', size: 'Oil on Canvas', price: '45,000', image: 'assets/paintings/WhatsApp Image 2025-04-13 at 11.53.43_a1066d3e.jpg' },
+                    { id: 39, title: 'Spring Collection 1', size: 'Oil on Canvas', price: '50,000', image: 'assets/paintings/WhatsApp Image 2025-05-21 at 21.37.59_3a5ce2df.jpg' },
+                    { id: 40, title: 'Summer Series 1', size: 'Oil on Canvas', price: '50,000', image: 'assets/paintings/WhatsApp Image 2025-07-01 at 09.47.14_48412d4d.jpg' },
+                    { id: 41, title: 'Summer Series 2', size: 'Oil on Canvas', price: '50,000', image: 'assets/paintings/WhatsApp Image 2025-07-01 at 09.48.03_4ac0dfbd copy.jpg' },
+                    { id: 42, title: 'Summer Series 3', size: 'Oil on Canvas', price: '50,000', image: 'assets/paintings/WhatsApp Image 2025-07-01 at 09.48.09_235dc826 copy.jpg' },
+                    { id: 43, title: 'Watercolor Study', size: '18 x 24 inches', price: '15,000', image: 'assets/watercolor/FB_IMG_1621162398076.jpg' }
+                ]
+            }
+        }
+    </script>
+</body>
+</html> 

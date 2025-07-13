@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Shalender Singh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50" x-data="{ mobileMenuOpen: false, worksDropdownOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-playfair font-semibold text-gray-900">Shalender Singh</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium font-bold">About</a>
+                        <a href="exhibitions.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Exhibitions</a>
+                        <a href="shop.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Shop</a>
+                        <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                            <button class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium flex items-center">
+                                Works
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div x-show="open" 
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 transform scale-95"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-95"
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                <a href="works.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-semibold">All Artworks</a>
+                                <a href="works.html?category=digital-art" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Digital Artworks</a>
+                                <a href="works.html?category=paintings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Oil Paintings</a>
+                                <a href="works.html?category=portrait-paintings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portrait Paintings</a>
+                                <a href="works.html?category=murals" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Murals</a>
+                                <a href="works.html?category=watercolor" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Watercolor</a>
+                                <a href="works.html?category=sketches" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sketchworks</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="text-gray-900 hover:text-gray-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" x-show="!mobileMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg class="h-6 w-6" x-show="mobileMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 transform -translate-y-2"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform -translate-y-2"
+            class="md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Home</a>
+                <a href="about.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md font-bold">About</a>
+                <a href="exhibitions.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Exhibitions</a>
+                <a href="shop.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Shop</a>
+                <div x-data="{ worksOpen: false }" class="relative">
+                    <button @click="worksOpen = !worksOpen" 
+                            class="w-full text-left px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md flex items-center justify-between">
+                        Works
+                        <svg class="h-5 w-5 transition-transform duration-200" 
+                             :class="{ 'rotate-180': worksOpen }"
+                             fill="none" 
+                             stroke="currentColor" 
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="worksOpen"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 transform -translate-y-2"
+                        x-transition:enter-end="opacity-100 transform translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 transform translate-y-0"
+                        x-transition:leave-end="opacity-0 transform -translate-y-2"
+                        class="bg-gray-50 rounded-md mt-1">
+                        <a href="works.html" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600 font-semibold">All Artworks</a>
+                        <a href="works.html?category=digital-art" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Digital Artworks</a>
+                        <a href="works.html?category=paintings" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Oil Paintings</a>
+                        <a href="works.html?category=portrait-paintings" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Portrait Paintings</a>
+                        <a href="works.html?category=murals" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Murals</a>
+                        <a href="works.html?category=watercolor" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Watercolor</a>
+                        <a href="works.html?category=sketches" class="block px-4 py-2 text-base text-gray-900 hover:text-gray-600">Sketchworks</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-gray-600 hover:bg-gray-50 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Artist Introduction -->
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0">
+                            <img src="assets/self_photo.jpg" alt="Shalender Singh" class="h-96 w-full md:w-96 object-cover">
+                        </div>
+                        <div class="p-8">
+                            <h1 class="text-3xl font-playfair font-bold text-gray-900 mb-4">About Shalender Singh</h1>
+                            <div class="py-4">
+                                <p class="text-base md:text-lg text-gray-700">
+                                    <span class="font-semibold">Artistic Statement:</span> <br>
+                                    "Where colors dance and emotions flow, I paint the stories that words cannot tell. My art is a journey—a bridge between the seen and the felt, the real and the imagined."
+                                </p>
+                            </div>
+                            <div class="mt-8">
+                                <a href="works.html" class="inline-block bg-gray-900 text-white px-6 md:px-8 py-3 rounded-lg font-medium text-base md:text-lg hover:bg-gray-800 transition-all duration-300">View Portfolio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Artist Details Section -->
+            <div class="max-w-6xl mx-auto mt-12">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Left Column - Longer Sections -->
+                    <div class="space-y-8">
+                        <!-- Group Shows -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Group Shows</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>TaanaBaana Pink Fest (Jaipur RIC)21st to 23rd Feb</li>
+                                <li>Advya (Tilak Gitai Art gallery Jaipur)11th to 15th Feb 2025</li>
+                                <li>Art Bash (Lokayat art gallery)3rd to 7th Jan 2025</li>
+                                <li>Fusion (Guwahati Artist's Guild)2nd Jan 2025</li>
+                                <li>63rd National Art Exhibition Lalit Kala Acadmy(New Delhi)2024</li>
+                                <li>"Art for Odisha" at AIFACS, Art gallery, New Delhi2019</li>
+                                <li>"Udayam" International Art Show by Jenus Art Gallery Indra Puram GZBD.June, 2019</li>
+                                <li>Two Men Show at Indi Collage Gallery, Hauz KashDec. 2018</li>
+                                <li>"khajuraho art festival", Madhya Pradesh2017</li>
+                                <li>"khajuraho art festival", Madhya Pradesh2016</li>
+                                <li>"Chitrakala Parishad", Banglore2016</li>
+                                <li>"Symphony of Colours" Group show by Gallerie Mantra, N. DelhiAug, 2014</li>
+                                <li>"Friendship-2014" Group show by Gallery Pioneer,Lado Sarai, N. DelhiAug, 2014</li>
+                                <li>"Reflection" Group show,Open Palm Court at IHC, N. DelhiAug,2014</li>
+                                <li>"Artist collective Fundraiser" Group show by IHC at Habitat World, N. DelhiS2014</li>
+                            </ul>
+                        </section>
+
+                        <!-- Camps -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Camps</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>Ranthambhore Art Camp. At SHASWAT @Sawai Madhupur (Rajasthan)03 - 05 April,2024</li>
+                                <li>Viksit Bharat at Old Fort10 March,2024</li>
+                                <li>Surajkund Art Camp, Art & Culture Dept. HR09-11 Feb,2024</li>
+                                <li>Painting Workshop by Sanskar Bharti, Jind, HR (7Stages of Ramayana)12 Jan 2024</li>
+                                <li>Viksit Bharat – Lalit K. Acadmy(New delhi)07 Jan,2024</li>
+                                <li>National Art Camp, Lalitkala Acadmy, (Rani Durgawati) at New Delhi27 - 01 oct, 2023</li>
+                                <li>National Contemporary Sculpture Camp / Symposium by Art and Culture Affairs Dept. Govt. of Haryana, Panchkula27 Aug– 10 Sep, 2019</li>
+                                <li>Open Air painting and Honored at Ahimsa Sthal Mehrauli, New Delhi2018</li>
+                                <li>Open Air Portrait for COLORTHON 2018 at Lohiya Park, Lucknow2018</li>
+                                <li>National artist camp by LALIT KALA ACADEMY at Bolgetti Palace, Kochi, Kerala2017</li>
+                                <li>National artist camp by HARYANA GOVT. at Punjab Kala Bhawan Chandigarh2017</li>
+                                <li>National artist camp at Jim Corbett National Park, Uttarakhand2016</li>
+                                <li>National artist camp at DPS Shrinagar, J&K2016</li>
+                                <li>Painting Canp at RAI FOUNDATION, Haryana2015</li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <!-- Right Column - Shorter Sections -->
+                    <div class="space-y-8">
+                        <!-- Personal Info -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Personal Information</h2>
+                            <ul class="text-gray-700 space-y-3">
+                                <li>D.O.B.: 27th June 1979, Haryana (Rohtak) India</li>
+                                <li>Phone: +91-9891873929, 9718501362</li>
+                                <li>Currently lives and works in New Delhi</li>
+                            </ul>
+                        </section>
+
+                        <!-- Education -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Education</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>B.F.A (Painting) College of art, New Delhi Batch 2006</li>
+                                <li>M.F.A (Painting) College of art, New Delhi Batch 2009</li>
+                            </ul>
+                        </section>
+
+                        <!-- Solo Shows -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Solo Shows</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>Vision of The Beauty – III at Jehangir Art gallery, Fort, Mumbai,May. 2019</li>
+                                <li>1st International Kala Mela, IGNCA Janpath, New Delhi2018</li>
+                                <li>Solo Show in "IHC" Convention Foyer, New Delhi2017</li>
+                                <li>"Pride of Nature" Convention Foyer, IHC, N.Delhi2014</li>
+                                <li>"Echo of Innocence" open palm court, IHC, N.Delhi2012</li>
+                                <li>"Beginning of the new world" Convention Foyer, IHC.N. D2010</li>
+                                <li>"Vision of Beauty" Convention Foyer, IHC, N.Delhi2010</li>
+                            </ul>
+                        </section>
+
+                        <!-- Workshops -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Workshops</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>POSH ACT 2013 workshop</li>
+                            </ul>
+                        </section>
+
+                        <!-- Awards -->
+                        <section class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-xl font-bold font-playfair mb-4 text-gray-900">Awards</h2>
+                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                                <li>Kaushal Shree Award by Sanskar Bharti, Soul and Sprit Art society Jind. HR2023</li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-sm">ALL IMAGES AND SITE CONTENT COPYRIGHT © 2025 SHALENDER SINGH - ALL RIGHTS RESERVED</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
